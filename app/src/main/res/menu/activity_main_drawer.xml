@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/donate"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Donate Blood" />
+        <item
+            android:id="@+id/request"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Request Blood" />
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Search BloodBank" />
+        <item
+            android:id="@+id/availability"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Blood Availability" />
+        <item
+            android:id="@+id/info"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Educational information" />
+        <item
+            android:id="@+id/history"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Donation History" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/contact_us"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Contact Us" />
+            <item
+                android:id="@+id/about_us"
+                android:icon="@drawable/ic_menu_send"
+                android:title="About Us" />
+            <item
+                android:id="@+id/feedback"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Feedback Form" />
+        </menu>
+    </item>
+
+</menu>
