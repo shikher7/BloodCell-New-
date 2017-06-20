@@ -25,6 +25,8 @@ public class FragmentDonate extends Fragment
         Spinner bloodbank;
         @BindView(R.id.spinner)
         Spinner city;
+        @BindView(R.id.time_slot)
+        Spinner timeSlot;
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,6 +38,9 @@ public class FragmentDonate extends Fragment
             ArrayAdapter<String> adapter2= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Cities));
             adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             city.setAdapter(adapter2);
+            ArrayAdapter<String> adapter3= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Time_slot));
+            adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            timeSlot.setAdapter(adapter3);
             return rootView;
     }
 

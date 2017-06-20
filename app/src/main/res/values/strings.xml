@@ -27,6 +27,11 @@
         <item>Kanpur</item>
         <item>Agra</item>
     </string-array>
+    <string-array name="Time_slot">
+        <item>10:00 am</item>
+        <item>12:00 pm</item>
+        <item>02:00 pm</item>
+    </string-array>
     <string name="title_activity_main3">Main3Activity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_maps">Map</string>

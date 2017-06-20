@@ -58,7 +58,7 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Registration No."
+                    android:hint="Registration No."
                     app:layout_constraintLeft_toLeftOf="@+id/editText3"
                     app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
@@ -70,7 +70,7 @@
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Place where registerd"
+                    android:hint="Place where registerd"
                     app:layout_constraintLeft_toLeftOf="@+id/radioButton16"
                     app:layout_constraintTop_toBottomOf="@+id/radioButton16" />
 
