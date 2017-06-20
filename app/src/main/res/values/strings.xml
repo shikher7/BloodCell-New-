@@ -22,6 +22,11 @@
         <item>Example2</item>
         <item>Example3</item>
     </string-array>
+    <string-array name="Cities">
+        <item>Lucknow</item>
+        <item>Kanpur</item>
+        <item>Agra</item>
+    </string-array>
     <string name="title_activity_main3">Main3Activity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_maps">Map</string>
