@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Spinner;
 
+import com.example.shikher.bloodcell.Background.Background_Donate;
+import com.example.shikher.bloodcell.Background.Background_Login;
 import com.example.shikher.bloodcell.R;
 import com.example.shikher.bloodcell.Views.Main.MainActivity;
 
@@ -60,24 +62,13 @@ public class FragmentDonate extends Fragment
         String citys = city.getSelectedItem().toString();
         String bloodbanks = bloodbank.getSelectedItem().toString();
         String timelsots = timeslot.getSelectedItem().toString();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dates = sdf.format(new Date(date.getDate()));
         String type = "donate_submit";
-       /* Background_Donate backgroundLogin = new Background_Donate(getActivity());
-        backgroundLogin.execute(type, citys,bloodbanks,timelsots,dates);*/
+        Background_Donate backgroundDonate = new Background_Donate(getActivity());
+        backgroundDonate.execute(type, citys,bloodbanks,timelsots,dates);
 
-/*
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent);
-        finish();*/
-    }
-    @OnClick(R.id.button_donate)
-    void onDonateSubmit()
-    {
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        startActivity(intent);
-
-    }
+}
 
 
     @Override
