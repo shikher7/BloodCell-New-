@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.shikher.bloodcell.Background.Background_Login;
 import com.example.shikher.bloodcell.R;
 import com.example.shikher.bloodcell.Views.Main.MainActivity;
 
@@ -20,6 +22,8 @@ import butterknife.OnClick;
 public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.login_button)
     Button loginButton;
+    @BindView(R.id.editText_mobile)
+    EditText editText_mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     }
     @OnClick(R.id.login_button)
     public void onUserLogin(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        String mobile=editText_mobile.getText().toString();
+        String type = "login";
+        Background_Login backgroundWorker = new Background_Login(this);
+        backgroundWorker.execute(type, mobile);
     }
 }

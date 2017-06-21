@@ -126,6 +126,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Mobile No."
                     android:imeOptions="actionNext"
+                    android:id="@+id/editText_mobile"
                     android:inputType="number|phone"
                     android:maxLines="1"
                     android:nextFocusDown="@+id/login_password"
