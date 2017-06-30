@@ -35,4 +35,12 @@
     <string name="title_activity_main3">Main3Activity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="about_us_text">We go the extra mile to ensure that every service and product meets the stringent quality criteria that is put in place. To this end, our activities are guided by a quality assurance process that is continually monitored for deviations. Each team member is governed by this process and is committed to delivering his or her very best. Further, each process is scrutinized to see how it can be improved to serve the client better.</string>
+    <string name="contact_us">Business Development
+M	:	+91 8400 999 780 (UP East)
+E	:	contact@weberservices.co.in
+Support Desk
+M	:	+91 8400 999 790
+E	:	support@weberservices.co.in</string>
 </resources>

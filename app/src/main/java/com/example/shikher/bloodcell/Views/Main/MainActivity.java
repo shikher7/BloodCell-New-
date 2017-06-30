@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.shikher.bloodcell.Views.Fragments.FragmentAboutUs;
+import com.example.shikher.bloodcell.Views.Fragments.FragmentContactUs;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentDonate;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentFeedback;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest1;
@@ -86,6 +88,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.feedback:
                 fragment = new FragmentFeedback();
+            case R.id.about_us:
+                fragment = new FragmentAboutUs();
+                break;
+            case R.id.contact_us:
+                fragment = new FragmentContactUs();
                 break;
         }
         if (fragment != null) {
