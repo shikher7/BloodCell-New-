@@ -7,26 +7,56 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import com.example.shikher.bloodcell.Background.Background_Request;
 import com.example.shikher.bloodcell.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Shikher on 14-06-2017.
  */
 
 public class FragmentRequest2 extends Fragment {
-    @BindView(R.id.blood_bank_spinner)
+    @BindView(R.id.spinner_bloodbank)
     Spinner bloodbank;
-    @BindView(R.id.blood_group_spinner)
+    @BindView(R.id.spinner_bloodgroup)
     Spinner bloogroup;
-    @BindView(R.id.spinner)
+    @BindView(R.id.city_spinner)
     Spinner city;
+    @BindView(R.id.first_name)
+    EditText firstName;
+    @BindView(R.id.last_name)
+    EditText lastName;
+    @BindView(R.id.description)
+    EditText description;
+    @BindView(R.id.age)
+    EditText age;/*
+    @BindView(R.id.male)
+    RadioButton male;
+    @BindView(R.id.female)
+    RadioButton female;
+    @BindView(R.id.others)
+    RadioButton others;
+    @BindView(R.id.date)
+    EditText  date;
+*/    @BindView(R.id.doctor_name)
+    EditText  doctorName;
+    @BindView(R.id.hospital_name)
+    EditText  hospitalName;
 
-        @Nullable
+
+
+
+    @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -44,6 +74,26 @@ public class FragmentRequest2 extends Fragment {
             return rootView;
 
         }
+    @OnClick(R.id.button_request)
+    public void onDonateSubmit(View v) {
+        String citys = city.getSelectedItem().toString();
+        String bloodbanks = bloodbank.getSelectedItem().toString();
+        String bloodgroups = bloogroup.getSelectedItem().toString();
+        String first_name=firstName.getText().toString();
+        String last_name=lastName.getText().toString();
+        String descriptions=description.getText().toString();
+        String ages=age.getText().toString();
+        String doctor_name=doctorName.getText().toString();
+        String hospital_name=hospitalName.getText().toString();
+
+
+        String dates = "2017-07-01";
+        String type = "request_submit";
+        Background_Request backgroundRequest = new Background_Request(getActivity());
+        backgroundRequest.execute(type,citys,bloodbanks,bloodgroups,first_name,last_name,
+                descriptions,ages,doctor_name,hospital_name,dates);
+
+    }
 
         @Override
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

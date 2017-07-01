@@ -2,10 +2,7 @@ package com.example.shikher.bloodcell.Background;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-
-import com.example.shikher.bloodcell.Views.Main.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,24 +16,35 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+/**
+ * Created by shikher on 1/7/17.
+ */
 
-public class Background_Donate extends AsyncTask<String,Void,String> {
+public class Background_Request extends AsyncTask<String,Void,String> {
     Context context;
     AlertDialog alertDialog;
-    public Background_Donate(Context ctx) {
+    public Background_Request(Context ctx) {
         context = ctx;
     }
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://192.168.43.65/bloodbank/donate.php";
-        if(type.equals("donate_submit")) {
+        String login_url = "http://192.168.43.65/bloodbank/request.php";
+        if(type.equals("request_submit")) {
             try {
                 String city = params[1];
                 String bloodbank = params[2];
-                String time = params[3];
-                String date = params[4];
+                String bloodgroup = params[3];
+                String firstname = params[4];
+                String lastname = params[5];
+                String description = params[6];
+                String age = params[7];
+                String doctor = params[8];
+                String hospital = params[9];
+                String date = params[10];/*
+                type,citys,bloodbanks,bloodgroups,first_name,last_name,
+                        descriptions,ages,doctor_name,hospital_name,dates);*/
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -46,7 +54,13 @@ public class Background_Donate extends AsyncTask<String,Void,String> {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String post_data = URLEncoder.encode("city","UTF-8")+"="+URLEncoder.encode(city,"UTF-8")+"&"
                         +URLEncoder.encode("bloodbank","UTF-8")+"="+URLEncoder.encode(bloodbank,"UTF-8")+"&"
-                        +URLEncoder.encode("time","UTF-8")+"="+URLEncoder.encode(time,"UTF-8")+"&"
+                        +URLEncoder.encode("bloodgroup","UTF-8")+"="+URLEncoder.encode(bloodgroup,"UTF-8")+"&"
+                        +URLEncoder.encode("firstname","UTF-8")+"="+URLEncoder.encode(firstname,"UTF-8")+"&"
+                        +URLEncoder.encode("lastname","UTF-8")+"="+URLEncoder.encode(lastname,"UTF-8")+"&"
+                        +URLEncoder.encode("description","UTF-8")+"="+URLEncoder.encode(description,"UTF-8")+"&"
+                        +URLEncoder.encode("age","UTF-8")+"="+URLEncoder.encode(age,"UTF-8")+"&"
+                        +URLEncoder.encode("doctor","UTF-8")+"="+URLEncoder.encode(doctor,"UTF-8")+"&"
+                        +URLEncoder.encode("hospital","UTF-8")+"="+URLEncoder.encode(hospital,"UTF-8")+"&"
                         +URLEncoder.encode("date","UTF-8")+"="+URLEncoder.encode(date,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
@@ -77,15 +91,15 @@ public class Background_Donate extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Thank You !");
+        alertDialog.setTitle("Login Status");
     }
 
     @Override
     protected void onPostExecute(String result) {
 
-            alertDialog.setMessage(result);
-            alertDialog.show();
-        }
+        alertDialog.setMessage(result);
+        alertDialog.show();
+    }
 
 
 

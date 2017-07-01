@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.example.shikher.bloodcell.R;
@@ -23,10 +25,9 @@ import butterknife.ButterKnife;
 
 public class FragmentRequest1 extends Fragment {
 
-Button request;
+    Button request;
 
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -48,6 +49,8 @@ Button request;
         return rootView;
 
     }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
