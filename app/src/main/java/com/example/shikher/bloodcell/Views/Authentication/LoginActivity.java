@@ -38,4 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         Background_Login backgroundWorker = new Background_Login(this);
         backgroundWorker.execute(type, mobile);
     }
+    @OnClick(R.id.register_button)
+    public void onUserRegister(View v) {
+        Intent i = new Intent(this, RegisterActivity.class);
+        this.startActivity(i);
+    }
 }

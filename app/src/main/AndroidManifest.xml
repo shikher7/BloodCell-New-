@@ -32,6 +32,10 @@
             android:label="BloodCell"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Views.Authentication.RegisterActivity"
+            android:label="BloodCell"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Views.Main.MainActivity"
             android:label="BloodCell"
             android:screenOrientation="portrait"
