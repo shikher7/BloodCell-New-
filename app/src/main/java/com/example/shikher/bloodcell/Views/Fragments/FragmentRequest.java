@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.shikher.bloodcell.Background.Background_Request;
 import com.example.shikher.bloodcell.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +48,9 @@ public class FragmentRequest extends Fragment {
     RadioButton others;
     @BindView(R.id.date)
     EditText  date;
-*/    @BindView(R.id.doctor_name)
+*/  @BindView(R.id.datePicker)
+    DatePicker date;
+    @BindView(R.id.doctor_name)
     EditText  doctorName;
     @BindView(R.id.hospital_name)
     EditText  hospitalName;
@@ -81,9 +87,13 @@ public class FragmentRequest extends Fragment {
         String ages=age.getText().toString();
         String doctor_name=doctorName.getText().toString();
         String hospital_name=hospitalName.getText().toString();
+        int   day  = date.getDayOfMonth();
+        int   month= date.getMonth();
+        int   year = date.getYear();
+        year=year-1900;
 
-
-        String dates = "2017-07-01";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dates = sdf.format(new Date(year, month, day));
         String type = "request_submit";
         Background_Request backgroundRequest = new Background_Request(getActivity());
         backgroundRequest.execute(type,citys,bloodbanks,bloodgroups,first_name,last_name,

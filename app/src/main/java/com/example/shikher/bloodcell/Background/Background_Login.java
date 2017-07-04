@@ -30,7 +30,7 @@ public class Background_Login extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://192.168.43.65/bloodbank/login.php";
+        String login_url = "http://192.168.43.176/bloodbank/login.php";
         if(type.equals("login")) {
             try {
                 String mobile = params[1];

@@ -30,7 +30,7 @@ public class Background_Request extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://192.168.43.65/bloodbank/request.php";
+        String login_url = "http://192.168.43.176/bloodbank/request.php";
         if(type.equals("request_submit")) {
             try {
                 String city = params[1];

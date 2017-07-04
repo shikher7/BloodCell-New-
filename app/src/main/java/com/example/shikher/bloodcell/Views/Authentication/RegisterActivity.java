@@ -1,5 +1,6 @@
 package com.example.shikher.bloodcell.Views.Authentication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -9,6 +10,7 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.shikher.bloodcell.Background.Background_Register;
 import com.example.shikher.bloodcell.Background.Background_Request;
 import com.example.shikher.bloodcell.R;
 
@@ -63,7 +65,8 @@ public class RegisterActivity extends AppCompatActivity {
         String EMAIL=email.getText().toString();
         String MOBILE=mobile.getText().toString();
         String type = "register_submit";
-
+        Background_Register backgroundDonate = new Background_Register(this);
+        backgroundDonate.execute(type, DOB,FIRST_NAME,LAST_NAME,CITY,BLOODGROUP,EMAIL,MOBILE);
 
     }
 }
