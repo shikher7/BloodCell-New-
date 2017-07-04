@@ -16,8 +16,7 @@ import com.example.shikher.bloodcell.Views.Fragments.FragmentAboutUs;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentContactUs;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentDonate;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentFeedback;
-import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest1;
-import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest2;
+import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentSearch;
 import com.example.shikher.bloodcell.R;
 
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new FragmentDonate();
                 break;
             case R.id.request:
-                fragment = new FragmentRequest1();
+                fragment = new FragmentRequest();
                 break;
             case R.id.search:
                 fragment = new FragmentSearch();

@@ -8,14 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import com.example.shikher.bloodcell.Background.Background_Request;
 import com.example.shikher.bloodcell.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +21,7 @@ import butterknife.OnClick;
  * Created by Shikher on 14-06-2017.
  */
 
-public class FragmentRequest2 extends Fragment {
+public class FragmentRequest extends Fragment {
     @BindView(R.id.spinner_bloodbank)
     Spinner bloodbank;
     @BindView(R.id.spinner_bloodgroup)
@@ -60,7 +56,7 @@ public class FragmentRequest2 extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-            View rootView = inflater.inflate(R.layout.fragment_request2, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_request, container, false);
             ButterKnife.bind(this, rootView);
             ArrayAdapter<String> adapter1= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Blood_Banks));
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
