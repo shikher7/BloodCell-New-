@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentSearch extends Fragment{
 
-    public static final String BASE_URL = "https://api.learn2crack.com";
+    public static final String BASE_URL = "http://192.168.43.65";
     private RecyclerView mRecyclerView;
     private ArrayList<AndroidVersion> mArrayList;
     private DataAdapter mAdapter;

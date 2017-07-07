@@ -50,8 +50,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.name.setText(bloodbanklist.get(position).getBloodBank(position));
-        holder.place.setText(bloodbanklist.get(position).getBloodBankPlace(position));
-        holder.phone.setText(bloodbanklist.get(position).getBloodBankPhone(position));
+        holder.phone.setText(bloodbanklist.get(position).getBloodBankPlace(position));
+        holder.place.setText(bloodbanklist.get(position).getBloodBankPhone(position));
 
     }
 
