@@ -1,4 +1,4 @@
-package com.example.shikher.bloodcell.Utils;
+package com.example.shikher.bloodcell.Background;
 
 public class JSONResponse {
     private AndroidVersion[] android;

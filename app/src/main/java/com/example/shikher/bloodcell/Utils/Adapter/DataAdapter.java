@@ -9,7 +9,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.shikher.bloodcell.R;
-import com.example.shikher.bloodcell.Utils.AndroidVersion;
+import com.example.shikher.bloodcell.Background.AndroidVersion;
 
 import java.util.ArrayList;
 

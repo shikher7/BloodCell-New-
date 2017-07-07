@@ -7,7 +7,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,9 +18,9 @@ import android.view.ViewGroup;
 import com.example.shikher.bloodcell.R;
 
 import com.example.shikher.bloodcell.Utils.Adapter.DataAdapter;
-import com.example.shikher.bloodcell.Utils.AndroidVersion;
-import com.example.shikher.bloodcell.Utils.JSONResponse;
-import com.example.shikher.bloodcell.Utils.RequestInterface;
+import com.example.shikher.bloodcell.Background.AndroidVersion;
+import com.example.shikher.bloodcell.Background.JSONResponse;
+import com.example.shikher.bloodcell.Background.RequestInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
