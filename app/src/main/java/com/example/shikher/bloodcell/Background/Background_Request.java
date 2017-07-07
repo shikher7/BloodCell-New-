@@ -2,7 +2,11 @@ package com.example.shikher.bloodcell.Background;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
+import com.example.shikher.bloodcell.Views.Main.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,7 +34,7 @@ public class Background_Request extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://192.168.43.176/bloodbank/request.php";
+        String login_url = "http://192.168.43.65/bloodbank/request.php";
         if(type.equals("request_submit")) {
             try {
                 String city = params[1];
@@ -90,15 +94,16 @@ public class Background_Request extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
+
     }
 
     @Override
     protected void onPostExecute(String result) {
 
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        Toast.makeText(context, "Request sent",
+                Toast.LENGTH_LONG).show();
+        Intent i = new Intent(context, MainActivity.class);
+        context.startActivity(i);
     }
 
 
