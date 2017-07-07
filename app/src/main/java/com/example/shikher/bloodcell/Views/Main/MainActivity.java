@@ -17,9 +17,9 @@ import com.example.shikher.bloodcell.Views.Fragments.FragmentContactUs;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentDonate;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentFeedback;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest;
-import com.example.shikher.bloodcell.Views.Fragments.FragmentSearch;
-import com.example.shikher.bloodcell.R;
 
+import com.example.shikher.bloodcell.R;
+import com.example.shikher.bloodcell.Views.Fragments.FragmentSearch;
 
 
 public class MainActivity extends AppCompatActivity
