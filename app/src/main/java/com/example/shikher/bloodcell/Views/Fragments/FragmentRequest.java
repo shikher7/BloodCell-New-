@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.shikher.bloodcell.Background.Background_Request;
 import com.example.shikher.bloodcell.R;
@@ -94,11 +95,17 @@ public class FragmentRequest extends Fragment {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dates = sdf.format(new Date(year, month, day));
-        String type = "request_submit";
-        Background_Request backgroundRequest = new Background_Request(getActivity());
-        backgroundRequest.execute(type,citys,bloodbanks,bloodgroups,first_name,last_name,
-                descriptions,ages,doctor_name,hospital_name,dates);
 
+        if(citys.matches("")||bloodbanks.matches("")||bloodgroups.matches("")||first_name.matches("")||
+                last_name.matches("")||descriptions.matches("")||ages.matches("")||doctor_name.matches("")||hospital_name.matches(""))
+            Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
+        else {
+
+            String type = "request_submit";
+            Background_Request backgroundRequest = new Background_Request(getActivity());
+            backgroundRequest.execute(type, citys, bloodbanks, bloodgroups, first_name, last_name,
+                    descriptions, ages, doctor_name, hospital_name, dates);
+        }
     }
 
         @Override
