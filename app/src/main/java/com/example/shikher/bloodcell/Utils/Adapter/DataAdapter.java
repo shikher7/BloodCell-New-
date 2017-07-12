@@ -8,16 +8,16 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.example.shikher.bloodcell.Background.city_JSONResponse;
 import com.example.shikher.bloodcell.R;
-import com.example.shikher.bloodcell.Background.AndroidVersion;
 
 import java.util.ArrayList;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> implements Filterable {
-    private ArrayList<AndroidVersion> mArrayList;
-    private ArrayList<AndroidVersion> mFilteredList;
+    private ArrayList<city_JSONResponse.AndroidVersion> mArrayList;
+    private ArrayList<city_JSONResponse.AndroidVersion> mFilteredList;
 
-    public DataAdapter(ArrayList<AndroidVersion> arrayList) {
+    public DataAdapter(ArrayList<city_JSONResponse.AndroidVersion> arrayList) {
         mArrayList = arrayList;
         mFilteredList = arrayList;
     }
@@ -55,9 +55,9 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> im
                     mFilteredList = mArrayList;
                 } else {
 
-                    ArrayList<AndroidVersion> filteredList = new ArrayList<>();
+                    ArrayList<city_JSONResponse.AndroidVersion> filteredList = new ArrayList<>();
 
-                    for (AndroidVersion androidVersion : mArrayList) {
+                    for (city_JSONResponse.AndroidVersion androidVersion : mArrayList) {
 
                         if (androidVersion.getPhone().toLowerCase().contains(charString) || androidVersion.getBankName().toLowerCase().contains(charString) || androidVersion.getCity().toLowerCase().contains(charString)) {
 
@@ -75,7 +75,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> im
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mFilteredList = (ArrayList<AndroidVersion>) filterResults.values;
+                mFilteredList = (ArrayList<city_JSONResponse.AndroidVersion>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

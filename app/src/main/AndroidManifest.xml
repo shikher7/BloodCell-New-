@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shikher.bloodcell">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -50,7 +51,8 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyCwaVa_Qhqein_9EHbskIGRZGw99mJS-zI"
+            />
 
     </application>
 

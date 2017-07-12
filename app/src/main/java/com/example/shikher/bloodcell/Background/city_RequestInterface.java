@@ -3,8 +3,8 @@ package com.example.shikher.bloodcell.Background;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface RequestInterface {
+public interface city_RequestInterface {
 
     @GET("bloodbank/bloodbank.php")
-    Call<JSONResponse> getJSON();
+    Call<city_JSONResponse> getJSON();
 }

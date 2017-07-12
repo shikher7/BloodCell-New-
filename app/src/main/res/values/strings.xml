@@ -17,6 +17,15 @@
         <item>O-ve</item>
         <item>Others</item>
     </string-array>
+    <string-array name="Blood_Component">
+        <item>Whole Blood</item>
+        <item>Packed Cell</item>
+        <item>Frozen Plasma</item>
+        <item>Cryoprecipitate</item>
+        <item>Platelet Concentrate</item>
+        <item>Platelet Rich Plasma</item>
+        <item>Fresh Frozen Plasma</item>
+    </string-array>
     <string-array name="Blood_Banks">
         <item>Example1</item>
         <item>Example2</item>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.shikher.bloodcell.Background.Background_Login;
 import com.example.shikher.bloodcell.R;
@@ -34,13 +35,19 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.login_button)
     public void onUserLogin(View v) {
         String mobile=editText_mobile.getText().toString();
-        String type = "login";
-        Background_Login backgroundWorker = new Background_Login(this);
-        backgroundWorker.execute(type, mobile);
+        if (mobile.matches(""))
+            Toast.makeText(this, "Enter mobile number.", Toast.LENGTH_SHORT).show();
+        else {
+            String type = "login";
+            Background_Login backgroundWorker = new Background_Login(this);
+            backgroundWorker.execute(type, mobile);
+            this.finish();
+        }
     }
     @OnClick(R.id.register_button)
     public void onUserRegister(View v) {
         Intent i = new Intent(this, RegisterActivity.class);
         this.startActivity(i);
+        this.finish();
     }
 }

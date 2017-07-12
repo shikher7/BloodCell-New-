@@ -30,7 +30,7 @@ public class Background_Login extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://192.168.43.65/bloodbank/login.php";
+        String login_url = "http://weberservice.co.in/bloodbank/login.php";
         if(type.equals("login")) {
             try {
                 String mobile = params[1];
@@ -80,6 +80,8 @@ public class Background_Login extends AsyncTask<String,Void,String> {
         if(result.contains("login success")) {
             Intent i = new Intent(context, MainActivity.class);
             context.startActivity(i);
+
+
         }
         else {
             alertDialog.setMessage(result);

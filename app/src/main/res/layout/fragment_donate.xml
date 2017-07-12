@@ -108,10 +108,10 @@
                  />
 
 
-            <CalendarView
+            <DatePicker
             android:id="@+id/calendar_donate"
             android:layout_width="300dp"
-            android:layout_height="343dp"
+                android:layout_height="432dp"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginRight="8dp"

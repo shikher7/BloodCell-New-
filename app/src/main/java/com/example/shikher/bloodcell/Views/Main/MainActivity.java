@@ -1,5 +1,6 @@
 package com.example.shikher.bloodcell.Views.Main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,7 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.example.shikher.bloodcell.Views.Authentication.LoginActivity;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentAboutUs;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentContactUs;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentDonate;
@@ -20,6 +23,9 @@ import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest;
 
 import com.example.shikher.bloodcell.R;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentSearch;
+import com.example.shikher.bloodcell.Views.Fragments.LearnFragment;
+
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity
@@ -59,6 +65,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @OnClick(R.id.logout)
+
+    public void onLogout(View v) {
+        Intent i = new Intent(this, LoginActivity.class);
+        this.startActivity(i);
+        this.finish();
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -87,11 +100,15 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.feedback:
                 fragment = new FragmentFeedback();
+                break;
             case R.id.about_us:
                 fragment = new FragmentAboutUs();
                 break;
             case R.id.contact_us:
                 fragment = new FragmentContactUs();
+                break;
+            case R.id.info:
+                fragment = new LearnFragment();
                 break;
         }
         if (fragment != null) {

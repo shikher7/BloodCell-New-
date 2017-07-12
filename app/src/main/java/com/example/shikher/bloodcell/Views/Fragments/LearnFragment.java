@@ -10,46 +10,46 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.shikher.bloodcell.R;
-import com.example.shikher.bloodcell.Utils.Adapter.SearchAdapter;
+import com.example.shikher.bloodcell.Utils.Adapter.EduInfoAdapter;
 
 
-public class FragmentSearch extends Fragment {
+public class LearnFragment extends Fragment {
 
-    TabLayout.Tab map,city,name;
+    TabLayout.Tab what,why,types,facts;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_search, container, false);
+        View root = inflater.inflate(R.layout.learn, container, false);
 
-        TabLayout tabLayout = (TabLayout) root.findViewById(R.id.tabs_search);
-        ViewPager viewPager = (ViewPager) root.findViewById(R.id.viewpager_search);
-        SearchAdapter viewPagerAdapter = new SearchAdapter(getActivity().getSupportFragmentManager());
+        TabLayout tabLayout = (TabLayout) root.findViewById(R.id.tabs);
+        ViewPager viewPager = (ViewPager) root.findViewById(R.id.viewpager);
+        EduInfoAdapter viewPagerAdapter = new EduInfoAdapter(getActivity().getSupportFragmentManager());
 
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
 
-        map = tabLayout.newTab();
-        city = tabLayout.newTab();
-        name = tabLayout.newTab();
+        what = tabLayout.newTab();
+        why = tabLayout.newTab();
+        types = tabLayout.newTab();
+        facts = tabLayout.newTab();
 
 
+        tabLayout.addTab(what, 0);
+        tabLayout.addTab(why, 1);
+        tabLayout.addTab(types, 2);
+        tabLayout.addTab(facts , 3);
 
-        tabLayout.addTab(map, 0);
-        tabLayout.addTab(city, 1);
-        tabLayout.addTab(name, 2);
 
-
-
-        map.setText("Search by Map");
-        city.setText("Search by City");
-        name.setText("Search by Name");
-
+        what.setText("What is it?");
+        why.setText("Why to donate?");
+        types.setText("Donation Types");
+        facts.setText("Important Facts");
 
 
         tabLayout.setTabTextColors(ContextCompat.getColorStateList(getActivity() , R.drawable.tab_selector));
         tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getActivity() , R.color.indicator));
-        map.select();
+        what.select();
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 

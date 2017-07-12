@@ -34,7 +34,7 @@ public class Background_Request extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://192.168.43.65/bloodbank/request.php";
+        String login_url = "http://weberservice.co.in/bloodbank/request.php";
         if(type.equals("request_submit")) {
             try {
                 String city = params[1];
@@ -46,7 +46,8 @@ public class Background_Request extends AsyncTask<String,Void,String> {
                 String age = params[7];
                 String doctor = params[8];
                 String hospital = params[9];
-                String date = params[10];/*
+                String date = params[10];
+                String component=params[11];/*
                 type,citys,bloodbanks,bloodgroups,first_name,last_name,
                         descriptions,ages,doctor_name,hospital_name,dates);*/
                 URL url = new URL(login_url);
@@ -65,7 +66,8 @@ public class Background_Request extends AsyncTask<String,Void,String> {
                         +URLEncoder.encode("age","UTF-8")+"="+URLEncoder.encode(age,"UTF-8")+"&"
                         +URLEncoder.encode("doctor","UTF-8")+"="+URLEncoder.encode(doctor,"UTF-8")+"&"
                         +URLEncoder.encode("hospital","UTF-8")+"="+URLEncoder.encode(hospital,"UTF-8")+"&"
-                        +URLEncoder.encode("date","UTF-8")+"="+URLEncoder.encode(date,"UTF-8");
+                        +URLEncoder.encode("date","UTF-8")+"="+URLEncoder.encode(date,"UTF-8")+"&"
+                        +URLEncoder.encode("component","UTF-8")+"="+URLEncoder.encode(component,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

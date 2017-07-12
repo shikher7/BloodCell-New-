@@ -14,10 +14,7 @@
             android:id="@+id/search"
             android:icon="@drawable/ic_search"
             android:title="Search BloodBank" />
-        <item
-            android:id="@+id/availability"
-            android:icon="@drawable/availability_icon"
-            android:title="Blood Availability" />
+
         <item
             android:id="@+id/info"
             android:icon="@drawable/ic_menu_send"

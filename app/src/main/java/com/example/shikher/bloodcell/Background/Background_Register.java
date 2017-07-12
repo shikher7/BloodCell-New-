@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.shikher.bloodcell.Views.Authentication.LoginActivity;
@@ -35,7 +36,7 @@ public class Background_Register extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://192.168.43.65/bloodbank/register.php";
+        String login_url = "http://weberservice.co.in/bloodbank/register.php";
         if(type.equals("register_submit")) {
             try {
                 String dob = params[1];
@@ -45,6 +46,7 @@ public class Background_Register extends AsyncTask<String,Void,String> {
                 String bloodgroup = params[5];
                 String email = params[6];
                 String mobile = params[7];
+
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -59,6 +61,7 @@ public class Background_Register extends AsyncTask<String,Void,String> {
                         +URLEncoder.encode("lastname","UTF-8")+"="+URLEncoder.encode(lastname,"UTF-8")+"&"
                         +URLEncoder.encode("mobile","UTF-8")+"="+URLEncoder.encode(mobile,"UTF-8")+"&"
                         +URLEncoder.encode("dob","UTF-8")+"="+URLEncoder.encode(dob,"UTF-8");
+
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -94,8 +97,7 @@ public class Background_Register extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         Toast.makeText(context, "Registration Successful",
                 Toast.LENGTH_LONG).show();
-        Intent i = new Intent(context, LoginActivity.class);
-        context.startActivity(i);
+
 
     }
 
