@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     Spinner bloodgroup;
     @BindView(R.id.register_email)
     EditText email;
-    @BindView(R.id.register_mobile)
+    @BindView(R.id.editText_mobile_register)
     EditText mobile;
 
 
