@@ -1,10 +1,12 @@
 package com.example.shikher.bloodcell.Background;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.example.shikher.bloodcell.Views.Authentication.LoginActivity;
 import com.example.shikher.bloodcell.Views.Main.MainActivity;
 
 import java.io.BufferedReader;
@@ -71,21 +73,26 @@ public class Background_Login extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
+//        alertDialog.setTitle("Login Status");
     }
 
     @Override
     protected void onPostExecute(String result) {
 
         if(result.contains("login success")) {
+
             Intent i = new Intent(context, MainActivity.class);
             context.startActivity(i);
+            ((Activity)context).finish();
 
 
         }
         else {
-            alertDialog.setMessage(result);
+
+            alertDialog.setMessage("Number is incorrect !!");
             alertDialog.show();
+
+
         }
 
 

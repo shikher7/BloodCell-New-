@@ -1,5 +1,6 @@
 package com.example.shikher.bloodcell.Background;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -97,6 +98,7 @@ public class Background_Register extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         Toast.makeText(context, "Registration Successful",
                 Toast.LENGTH_LONG).show();
+        ((Activity)context).finish();
 
 
     }

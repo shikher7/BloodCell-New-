@@ -2,6 +2,7 @@ package com.example.shikher.bloodcell.Views.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.shikher.bloodcell.Views.Authentication.LoginActivity;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentAboutUs;
@@ -54,8 +56,9 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            onBackPressed2();
         }
+
     }
 
     @Override
@@ -129,4 +132,28 @@ public class MainActivity extends AppCompatActivity
         displayselectedscreen(id);
         return true;
     }
+
+
+    boolean doubleBackToExitPressedOnce = false;
+
+
+
+    public void onBackPressed2() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 }
+

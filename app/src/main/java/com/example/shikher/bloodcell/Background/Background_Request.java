@@ -1,5 +1,6 @@
 package com.example.shikher.bloodcell.Background;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -106,6 +107,7 @@ public class Background_Request extends AsyncTask<String,Void,String> {
                 Toast.LENGTH_LONG).show();
         Intent i = new Intent(context, MainActivity.class);
         context.startActivity(i);
+        ((Activity)context).finish();
     }
 
 

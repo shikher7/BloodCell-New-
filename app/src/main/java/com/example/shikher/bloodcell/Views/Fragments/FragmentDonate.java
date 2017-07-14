@@ -1,5 +1,7 @@
 package com.example.shikher.bloodcell.Views.Fragments;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shikher.bloodcell.Background.Background_Donate;
@@ -26,6 +30,7 @@ import com.example.shikher.bloodcell.Views.Main.MainActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -47,17 +52,18 @@ public class FragmentDonate extends Fragment
 
     private ArrayList<city_JSONResponse.AndroidVersion> mArrayList;
 
-
-        @BindView(R.id.spinner_blood_bank)
+    private int mYear, mMonth, mDay;
+    private int mYear2, mMonth2, mDay2;
+    @BindView(R.id.spinner_blood_bank)
         Spinner bloodbank;
         @BindView(R.id.spinner_city)
         Spinner city;
         @BindView(R.id.spinner_time_slot)
         Spinner timeslot;
         @BindView(R.id.calendar_donate)
-        DatePicker date;
-        /*@BindView(R.id.button_donate)
-        Button submit;*/
+        TextView date;
+        @BindView(R.id.button_donate)
+        Button submit;
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -107,23 +113,60 @@ public class FragmentDonate extends Fragment
         String bloodbanks = bloodbank.getSelectedItem().toString();
         String timelsots = timeslot.getSelectedItem().toString();
 
-        int   day  = date.getDayOfMonth();
+        /*int   day  = date.getDayOfMonth();
         int   month= date.getMonth();
         int   year = date.getYear();
-        year=year-1900;
+        year=year-1900;*/
+        mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String dates = sdf.format(new Date(year, month, day));
+        String dates = sdf.format(new Date(mYear2, mMonth2, mDay2));
 
-        if(citys.matches("")||bloodbanks.matches("")||timelsots.matches("")||dates.matches(""))
-            Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
+        Calendar c = Calendar.getInstance();
+        String currentDate = sdf.format(c.getTime());
+
+        if(dates.compareTo(currentDate)>=0) {
+            if (citys.matches("") || bloodbanks.matches("") || timelsots.matches("") || dates.matches(""))
+                Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
+            else {
+
+                String type = "donate_submit";
+                submit.setEnabled(false);
+                Background_Donate backgroundDonate = new Background_Donate(getActivity());
+                backgroundDonate.execute(type, citys, bloodbanks, timelsots, dates);
+
+            }
+
+        }
         else {
-
-            String type = "donate_submit";
-            Background_Donate backgroundDonate = new Background_Donate(getActivity());
-            backgroundDonate.execute(type, citys, bloodbanks, timelsots, dates);
-            getActivity().finish();
+            Toast.makeText(getActivity(),"Date not Posiible !!",Toast.LENGTH_LONG).show();
         }
 
+}
+@OnClick(R.id.calendar_donate)
+public void calendar_dialog()
+{
+
+    // Get Current Date
+    final Calendar c = Calendar.getInstance();
+    mYear = c.get(Calendar.YEAR);
+    mMonth = c.get(Calendar.MONTH);
+    mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+            new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker view, int year,
+                                      int monthOfYear, int dayOfMonth) {
+
+                    date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                mYear2=year;
+                    mDay2=dayOfMonth;
+                    mMonth2=monthOfYear;
+                }
+            }, mYear, mMonth, mDay);
+    datePickerDialog.show();
 }
 
 

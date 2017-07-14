@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -56,7 +57,11 @@ public class FragmentRequest extends Fragment {
     @BindView(R.id.description)
     EditText description;
     @BindView(R.id.age)
-    EditText age;/*
+    EditText age;
+    @BindView(R.id.button_request)
+    Button submit;
+    /*
+
     @BindView(R.id.male)
     RadioButton male;
     @BindView(R.id.female)
@@ -154,12 +159,12 @@ public class FragmentRequest extends Fragment {
                     last_name.matches("") || descriptions.matches("") || ages.matches("") || doctor_name.matches("") || hospital_name.matches(""))
                 Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
             else {
-
+                submit.setEnabled(false);
                 String type = "request_submit";
                 Background_Request backgroundRequest = new Background_Request(getActivity());
                 backgroundRequest.execute(type, citys, bloodbanks, bloodgroups, first_name, last_name,
                         descriptions, ages, doctor_name, hospital_name, dates, components);
-                getActivity().finish();
+
             }
         }
         else {

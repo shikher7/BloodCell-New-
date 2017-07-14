@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     @BindView(R.id.editText_mobile)
     EditText editText_mobile;
-
+    public static String result="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +41,16 @@ public class LoginActivity extends AppCompatActivity {
             String type = "login";
             Background_Login backgroundWorker = new Background_Login(this);
             backgroundWorker.execute(type, mobile);
-            this.finish();
+
         }
     }
     @OnClick(R.id.register_button)
     public void onUserRegister(View v) {
         Intent i = new Intent(this, RegisterActivity.class);
+
         this.startActivity(i);
-        this.finish();
+
     }
+
+
 }
