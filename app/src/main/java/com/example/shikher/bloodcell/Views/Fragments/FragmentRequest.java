@@ -1,5 +1,6 @@
 package com.example.shikher.bloodcell.Views.Fragments;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shikher.bloodcell.Background.Background_Request;
@@ -22,6 +24,7 @@ import com.example.shikher.bloodcell.Utils.Adapter.DataAdapter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -63,7 +66,7 @@ public class FragmentRequest extends Fragment {
     @BindView(R.id.date)
     EditText  date;
 */  @BindView(R.id.datePicker)
-    DatePicker date;
+    TextView date;
     @BindView(R.id.doctor_name)
     EditText  doctorName;
     @BindView(R.id.hospital_name)
@@ -72,6 +75,8 @@ public class FragmentRequest extends Fragment {
     public static final String BASE_URL = "http://weberservice.co.in";
 
     private ArrayList<city_JSONResponse.AndroidVersion> mArrayList;
+    private int mYear, mMonth, mDay;
+    private int mYear2, mMonth2, mDay2;
 
 
 
@@ -136,25 +141,29 @@ public class FragmentRequest extends Fragment {
         String doctor_name=doctorName.getText().toString();
         String hospital_name=hospitalName.getText().toString();
         String components=component.getSelectedItem().toString();
-        int   day  = date.getDayOfMonth();
-        int   month= date.getMonth();
-        int   year = date.getYear();
-        year=year-1900;
-
+        mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String dates = sdf.format(new Date(year, month, day));
+        String dates = sdf.format(new Date(mYear2, mMonth2, mDay2));
 
+        Calendar c = Calendar.getInstance();
+        String currentDate = sdf.format(c.getTime());
 
-        if(citys.matches("")||bloodbanks.matches("")||bloodgroups.matches("")||first_name.matches("")||
-                last_name.matches("")||descriptions.matches("")||ages.matches("")||doctor_name.matches("")||hospital_name.matches(""))
-            Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
+        if(dates.compareTo(currentDate)>=0) {
+
+            if (citys.matches("") || bloodbanks.matches("") || bloodgroups.matches("") || first_name.matches("") ||
+                    last_name.matches("") || descriptions.matches("") || ages.matches("") || doctor_name.matches("") || hospital_name.matches(""))
+                Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
+            else {
+
+                String type = "request_submit";
+                Background_Request backgroundRequest = new Background_Request(getActivity());
+                backgroundRequest.execute(type, citys, bloodbanks, bloodgroups, first_name, last_name,
+                        descriptions, ages, doctor_name, hospital_name, dates, components);
+                getActivity().finish();
+            }
+        }
         else {
-
-            String type = "request_submit";
-            Background_Request backgroundRequest = new Background_Request(getActivity());
-            backgroundRequest.execute(type, citys, bloodbanks, bloodgroups, first_name, last_name,
-                    descriptions, ages, doctor_name, hospital_name, dates,components);
-            getActivity().finish();
+            Toast.makeText(getActivity(),"Date not Posiible !!",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -162,6 +171,32 @@ public class FragmentRequest extends Fragment {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
         }
+    @OnClick(R.id.datePicker)
+    public void calendar_dialog()
+    {
+
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        mYear2=year;
+                        mDay2=dayOfMonth;
+                        mMonth2=monthOfYear;
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
     }
 
 
