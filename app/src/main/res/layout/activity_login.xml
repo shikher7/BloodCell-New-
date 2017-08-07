@@ -79,7 +79,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:text="Register for new user."
+                android:text="Register as Blodd Donor"
                 android:onClick="onUserRegister"
                 android:textAppearance="@android:style/TextAppearance.Theme"
                 android:textColor="@color/colorPrimary"
