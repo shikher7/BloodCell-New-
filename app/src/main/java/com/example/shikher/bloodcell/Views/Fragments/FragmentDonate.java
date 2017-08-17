@@ -1,11 +1,13 @@
 package com.example.shikher.bloodcell.Views.Fragments;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +75,6 @@ public class FragmentDonate extends Fragment
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-
             city_RequestInterface request = retrofit.create(city_RequestInterface.class);
             Call<city_JSONResponse> call = request.getJSON();
             call.enqueue(new Callback<city_JSONResponse>() {
@@ -138,7 +139,7 @@ public class FragmentDonate extends Fragment
 
         }
         else {
-            Toast.makeText(getActivity(),"Date not Posiible !!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(),"Selected Date is incorrect !!",Toast.LENGTH_LONG).show();
         }
 
 }
@@ -174,5 +175,13 @@ public void calendar_dialog()
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        android.support.v7.app.ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setTitle("Donate Blood");
+    }
+
 }
 

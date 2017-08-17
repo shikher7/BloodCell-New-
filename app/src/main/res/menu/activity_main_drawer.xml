@@ -7,6 +7,10 @@
             android:icon="@drawable/donate_icon"
             android:title="Donate Blood" />
         <item
+            android:id="@+id/history"
+            android:icon="@drawable/ic_history"
+            android:title="Donation History" />
+        <item
             android:id="@+id/request"
             android:icon="@drawable/ic_request"
             android:title="Request Blood" />
@@ -19,10 +23,7 @@
             android:id="@+id/info"
             android:icon="@drawable/ic_menu_send"
             android:title="Educational information" />
-        <item
-            android:id="@+id/history"
-            android:icon="@drawable/ic_history"
-            android:title="Donation History" />
+
     </group>
 
     <item android:title="Communicate">

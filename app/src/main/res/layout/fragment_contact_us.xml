@@ -30,14 +30,15 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/weber_logo"
+            android:layout_marginTop="-5dp"
+            android:src="@drawable/sbtc_logo"
 
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="1.0" />
 
         <TextView
             android:id="@+id/textView4"
@@ -49,12 +50,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:textStyle="bold"
-            android:text="Business Development
-M	:	+91 8400 999 780 (UP East)
-E	:	contact@weberservices.co.in
-Support Desk
-M	:	+91 8400 999 790
-E	:	support@weberservices.co.in"
+            android:text="State Blood Transfusion Council, Uttar Pradesh
+4th Floor, A-Block, Pickup Bhawan, Gomti Nagar, Lucknow- 226 010
+Phone: 0522-2720360  Fax: 0522-2721135
+Email: bsupsacs@gmail.com"
+            android:textAlignment="center"
             android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

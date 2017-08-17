@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -168,7 +169,7 @@ public class FragmentRequest extends Fragment {
             }
         }
         else {
-            Toast.makeText(getActivity(),"Date not Posiible !!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(),"Selected Date is incorrect !!",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -201,6 +202,13 @@ public class FragmentRequest extends Fragment {
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        android.support.v7.app.ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setTitle("Request Blood");
     }
     }
 

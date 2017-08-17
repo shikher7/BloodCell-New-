@@ -78,13 +78,13 @@ public class SplashActivity extends AppCompatActivity implements Animation.Anima
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        text1.typeText("Be a Hero");
+                        text1.typeText("Up Blood Cell APP");
                     }
                 });
                 Thread thread1 = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while(!text1.getText().equals("Be a Hero")) {
+                        while(!text1.getText().equals("Up Blood Cell APP")) {
                             try {
                                 Thread.sleep(20);
                             } catch (InterruptedException e) {
@@ -94,11 +94,11 @@ public class SplashActivity extends AppCompatActivity implements Animation.Anima
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                text2.typeText("Donate Blood");
+                                text2.typeText("");
                                 Thread thread2 = new Thread(new Runnable() {
                                     @Override
                                     public void run () {
-                                        while (!text2.getText().equals("Donate Blood")) {
+                                        while (!text2.getText().equals("")) {
                                             try {
                                                 Thread.sleep(20);
                                             } catch (InterruptedException e) {
