@@ -152,7 +152,6 @@ public class MapFragment extends Fragment {
     public void onResume() {
         super.onResume();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        android.support.v7.app.ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setTitle("Search..");
+
     }
 }
