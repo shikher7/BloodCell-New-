@@ -3,6 +3,7 @@ package com.example.shikher.bloodcell.Views.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,13 @@ public class FragmentFeedback extends Fragment {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
         }
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        android.support.v7.app.ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setTitle("Feedback");
+    }
     }
     //l
 

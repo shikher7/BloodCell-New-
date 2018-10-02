@@ -78,13 +78,13 @@ public class SplashActivity extends AppCompatActivity implements Animation.Anima
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        text1.typeText("Up Blood Cell APP");
+                        text1.typeText("Review -2");
                     }
                 });
                 Thread thread1 = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while(!text1.getText().equals("Up Blood Cell APP")) {
+                        while(!text1.getText().equals("Review -2")) {
                             try {
                                 Thread.sleep(20);
                             } catch (InterruptedException e) {

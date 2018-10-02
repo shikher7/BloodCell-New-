@@ -32,10 +32,11 @@ public class Background_Login extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://weberservice.co.in/bloodbank/login.php";
+        String login_url = "http://shikher707.000webhostapp.com/login.php";
         if(type.equals("login")) {
             try {
                 String mobile = params[1];
+                String password = params[2];
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -43,7 +44,8 @@ public class Background_Login extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("mobile","UTF-8")+"="+URLEncoder.encode(mobile,"UTF-8");
+                String post_data = URLEncoder.encode("mobile","UTF-8")+"="+URLEncoder.encode(mobile,"UTF-8")+"&"
+                        +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");;
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -89,7 +91,7 @@ public class Background_Login extends AsyncTask<String,Void,String> {
         }
         else {
 
-            alertDialog.setMessage("Number is incorrect !!");
+            alertDialog.setMessage("Wrong Mobile & Password Combination !!");
             alertDialog.show();
 
 

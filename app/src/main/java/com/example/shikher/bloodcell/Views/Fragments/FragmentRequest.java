@@ -38,9 +38,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Shikher on 14-06-2017.
- */
+
 
 public class FragmentRequest extends Fragment {
     @BindView(R.id.spinner_bloodbank)
@@ -78,9 +76,9 @@ public class FragmentRequest extends Fragment {
     @BindView(R.id.hospital_name)
     EditText  hospitalName;
 
-    public static final String BASE_URL = "http://weberservice.co.in";
+//    public static final String BASE_URL = "http://weberservice.co.in";
 
-    private ArrayList<city_JSONResponse.AndroidVersion> mArrayList;
+//    private ArrayList<city_JSONResponse.AndroidVersion> mArrayList;
     private int mYear, mMonth, mDay;
     private int mYear2, mMonth2, mDay2;
 
@@ -93,25 +91,26 @@ public class FragmentRequest extends Fragment {
             View rootView = inflater.inflate(R.layout.fragment_request, container, false);
 
             ButterKnife.bind(this, rootView);
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+//            Retrofit retrofit = new Retrofit.Builder()
+//                    .baseUrl(BASE_URL)
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .build();
+//
+//            city_RequestInterface request = retrofit.create(city_RequestInterface.class);
+//            Call<city_JSONResponse> call = request.getJSON();
+//            call.enqueue(new Callback<city_JSONResponse>() {
 
-            city_RequestInterface request = retrofit.create(city_RequestInterface.class);
-            Call<city_JSONResponse> call = request.getJSON();
-            call.enqueue(new Callback<city_JSONResponse>() {
-
-                @Override
-                public void onResponse(Call<city_JSONResponse> call, Response<city_JSONResponse> response) {
-
-                    city_JSONResponse jsonResponse = response.body();
-                    mArrayList = new ArrayList<>(Arrays.asList(jsonResponse.getAndroid()));
-                    String Blood_Banks[]=new String[mArrayList.size()];
-                    for(int i=0;i<mArrayList.size();i++)
-                    {
-                        Blood_Banks[i]=mArrayList.get(i).getBankName().toString();
-                    }
+//                @Override
+//                public void onResponse(Call<city_JSONResponse> call, Response<city_JSONResponse> response) {
+//
+//                    city_JSONResponse jsonResponse = response.body();
+//                    mArrayList = new ArrayList<>(Arrays.asList(jsonResponse.getAndroid()));
+//                    String Blood_Banks[]=new String[mArrayList.size()];
+//                    for(int i=0;i<mArrayList.size();i++)
+//                    {
+//                        Blood_Banks[i]=mArrayList.get(i).getBankName().toString();
+//                    }
+        String Blood_Banks[]={"VIT BloodBank","Katpadi BloodBank","CMC BloodBank"};
 
             ArrayAdapter<String> adapter1= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,Blood_Banks);
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -125,13 +124,13 @@ public class FragmentRequest extends Fragment {
             ArrayAdapter<String> adapter4= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Blood_Component));
             adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             component.setAdapter(adapter4);
-                }
-
-                @Override
-                public void onFailure(Call<city_JSONResponse> call, Throwable t) {
-                    Log.d("Error",t.getMessage());
-                }
-            });
+//                }
+//
+//                @Override
+//                public void onFailure(Call<city_JSONResponse> call, Throwable t) {
+//                    Log.d("Error",t.getMessage());
+//                }
+//            });
             return rootView;
 
         }

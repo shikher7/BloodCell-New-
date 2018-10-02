@@ -32,7 +32,7 @@ public class Background_Donate extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://192.168.43.65/bloodbank/donate.php";
+        String login_url = "http://shikher707.000webhostapp.com/donate.php";
         if(type.equals("donate_submit")) {
             try {
                 String city = params[1];

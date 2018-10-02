@@ -24,8 +24,6 @@ import com.example.shikher.bloodcell.Views.Fragments.FragmentFeedback;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest;
 
 import com.example.shikher.bloodcell.R;
-import com.example.shikher.bloodcell.Views.Fragments.FragmentSearch;
-import com.example.shikher.bloodcell.Views.Fragments.LearnFragment;
 
 import butterknife.OnClick;
 
@@ -92,6 +90,11 @@ public class MainActivity extends AppCompatActivity
     private void displayselectedscreen(int id) {
         Fragment fragment = null;
         switch (id) {
+            case R.id.history:
+                Toast.makeText(this, "Coming soon in next Prototype.!!",
+                        Toast.LENGTH_LONG).show();
+//                fragment = new FragmentDonate();
+                break;
             case R.id.donate:
                 fragment = new FragmentDonate();
                 break;
@@ -99,7 +102,9 @@ public class MainActivity extends AppCompatActivity
                 fragment = new FragmentRequest();
                 break;
             case R.id.search:
-                fragment = new FragmentSearch();
+                Toast.makeText(this, "Coming soon in next Prototype.!!",
+                        Toast.LENGTH_LONG).show();
+//                fragment = new FragmentSearch();
                 break;
             case R.id.feedback:
                 fragment = new FragmentFeedback();
@@ -111,7 +116,9 @@ public class MainActivity extends AppCompatActivity
                 fragment = new FragmentContactUs();
                 break;
             case R.id.info:
-                fragment = new LearnFragment();
+                Toast.makeText(this, "Coming soon in next Prototype.!!",
+                        Toast.LENGTH_LONG).show();
+//                fragment = new LearnFragment();
                 break;
         }
         if (fragment != null) {

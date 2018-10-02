@@ -25,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     @BindView(R.id.editText_mobile)
     EditText editText_mobile;
+    @BindView(R.id.editText4)
+    EditText editText_password;
     public static String result="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +37,13 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.login_button)
     public void onUserLogin(View v) {
         String mobile=editText_mobile.getText().toString();
+        String password=editText_password.getText().toString();
         if (mobile.matches(""))
             Toast.makeText(this, "Enter mobile number.", Toast.LENGTH_SHORT).show();
         else {
             String type = "login";
             Background_Login backgroundWorker = new Background_Login(this);
-            backgroundWorker.execute(type, mobile);
+            backgroundWorker.execute(type, mobile,password);
 
         }
     }

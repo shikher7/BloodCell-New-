@@ -5,6 +5,6 @@ import retrofit2.http.GET;
 
 public interface city_RequestInterface {
 
-    @GET("bloodbank/bloodbank.php")
+    @GET("bloodbank.php")
     Call<city_JSONResponse> getJSON();
 }

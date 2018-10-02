@@ -37,7 +37,7 @@ public class Background_Register extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String result="";
-        String login_url = "http://weberservice.co.in/bloodbank/register.php";
+        String login_url = "http://shikher707.000webhostapp.com/register.php";
         if(type.equals("register_submit")) {
             try {
                 String dob = params[1];

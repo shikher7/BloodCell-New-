@@ -32,9 +32,9 @@
         <item>Example3</item>
     </string-array>
     <string-array name="Cities">
-        <item>Lucknow</item>
-        <item>Kanpur</item>
-        <item>Agra</item>
+        <item>Vellore</item>
+        <item>Chennai</item>
+        <item>Bangalore</item>
     </string-array>
     <string-array name="Time_slot">
         <item>10:00 am</item>
