@@ -1,7 +1,7 @@
 package com.example.shikher.bloodcell.Views.Authentication;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,20 +9,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shikher.bloodcell.Background.Background_Register;
-import com.example.shikher.bloodcell.Background.Background_Request;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.shikher.bloodcell.R;
+import com.example.shikher.bloodcell.Utils.Constants;
+import com.example.shikher.bloodcell.Utils.RequestHandler;
+import com.example.shikher.bloodcell.Utils.SharedPrefManager;
+import com.example.shikher.bloodcell.Views.Main.MainActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,11 +62,17 @@ public class RegisterActivity extends AppCompatActivity {
     Button submit;
     private int mYear, mMonth, mDay;
     private int mYear2, mMonth2, mDay2;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+            return;
+        }
         ButterKnife.bind(this);
         ArrayAdapter<String> adapter1= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Blood_Group));
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -69,22 +86,61 @@ public class RegisterActivity extends AppCompatActivity {
 
         mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String DOB = sdf.format(new Date(mYear2, mMonth2, mDay2));
-        String FIRST_NAME=first_name.getText().toString();
-        String LAST_NAME=last_name.getText().toString();
-        String CITY=city.getSelectedItem().toString();
-        String BLOODGROUP=bloodgroup.getSelectedItem().toString();
-        String EMAIL=email.getText().toString();
-        String MOBILE=mobile.getText().toString();
+        final String DOB = sdf.format(new Date(mYear2, mMonth2, mDay2));
+        final String FIRST_NAME=first_name.getText().toString().trim();
+        final String LAST_NAME=last_name.getText().toString().trim();
+        final String CITY=city.getSelectedItem().toString();
+        final String BLOODGROUP=bloodgroup.getSelectedItem().toString();
+        final String EMAIL=email.getText().toString().trim();
+        final String MOBILE=mobile.getText().toString().trim();
         if(DOB.matches("")||FIRST_NAME.matches("")||LAST_NAME.matches("")||CITY.matches("")||BLOODGROUP.matches("")||EMAIL.matches("")||MOBILE.matches(""))
             Toast.makeText(this, "All Fields are not filled.", Toast.LENGTH_LONG).show();
         else {
-            submit.setEnabled(false);
-            String type = "register_submit";
-            Background_Register backgroundDonate = new Background_Register(this);
-            Intent i = new Intent(this, LoginActivity.class);
-            this.startActivity(i);
-            backgroundDonate.execute(type, DOB, FIRST_NAME, LAST_NAME, CITY, BLOODGROUP, EMAIL, MOBILE);
+            progressDialog.setMessage("Registering user...");
+            progressDialog.show();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                    Constants.URL_REGISTER,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            progressDialog.dismiss();
+
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+
+                                Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progressDialog.hide();
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("dob", DOB);
+                    params.put("name", FIRST_NAME+" "+LAST_NAME);
+//                    params.put("lname", LAST_NAME);
+                    params.put("city", CITY);
+                    params.put("bloodgroup", BLOODGROUP);
+                    params.put("email", EMAIL);
+                    params.put("mobile", MOBILE);
+                    params.put("password", "abc123xyz");
+                    return params;
+                }
+            };
+
+
+            RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+
 
         }
 

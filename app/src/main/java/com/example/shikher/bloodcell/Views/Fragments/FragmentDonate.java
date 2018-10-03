@@ -1,48 +1,30 @@
 package com.example.shikher.bloodcell.Views.Fragments;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shikher.bloodcell.Background.Background_Donate;
-import com.example.shikher.bloodcell.Background.Background_Login;
-import com.example.shikher.bloodcell.Background.city_JSONResponse;
-import com.example.shikher.bloodcell.Background.city_RequestInterface;
 import com.example.shikher.bloodcell.R;
-import com.example.shikher.bloodcell.Utils.Adapter.DataAdapter;
-import com.example.shikher.bloodcell.Views.Main.MainActivity;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class FragmentDonate extends Fragment

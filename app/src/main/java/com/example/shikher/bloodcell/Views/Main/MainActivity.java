@@ -11,11 +11,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shikher.bloodcell.Utils.SharedPrefManager;
 import com.example.shikher.bloodcell.Views.Authentication.LoginActivity;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentAboutUs;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentContactUs;
@@ -25,16 +29,35 @@ import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest;
 
 import com.example.shikher.bloodcell.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    @BindView(R.id.name)
+    TextView name;
+    @BindView(R.id.email)
+    TextView email;
+    @BindView(R.id.phone)
+    TextView phone;
+    @BindView(R.id.logout)
+    Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+//        Log.v("HEY",(SharedPrefManager.getInstance(this).getUserEmail()));
+        ButterKnife.bind(this);
+        email.setText(SharedPrefManager.getInstance(this).getUserEmail());
+        name.setText(SharedPrefManager.getInstance(this).getUsername());
+        phone.setText(SharedPrefManager.getInstance(this).getUserMobile());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -67,11 +90,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     @OnClick(R.id.logout)
-
-    public void onLogout(View v) {
-        Intent i = new Intent(this, LoginActivity.class);
-        this.startActivity(i);
-        this.finish();
+    public void onLogout(View view) {
+        SharedPrefManager.getInstance(this).logout();
+        finish();
+        startActivity(new Intent(this, LoginActivity.class));
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
