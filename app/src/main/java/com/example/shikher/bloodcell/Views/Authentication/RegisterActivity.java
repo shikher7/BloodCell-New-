@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,10 +48,8 @@ import butterknife.OnClick;
 public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.register_calenderView)
     TextView dob;
-    @BindView(R.id.register_first_name)
-    EditText first_name;
-    @BindView(R.id.register_last_name)
-    EditText last_name;
+    @BindView(R.id.register_full_name)
+    EditText full_name;
     @BindView(R.id.register_city_spinner)
     Spinner city;
     @BindView(R.id.register_spinner_bloodgroup)
@@ -60,6 +60,10 @@ public class RegisterActivity extends AppCompatActivity {
     EditText mobile;
     @BindView(R.id.button_register)
     Button submit;
+    @BindView(R.id.register_password)
+    EditText password;
+    @BindView(R.id.register_radioGroup)
+    RadioGroup radioGroup;
     private int mYear, mMonth, mDay;
     private int mYear2, mMonth2, mDay2;
     private ProgressDialog progressDialog;
@@ -83,17 +87,30 @@ public class RegisterActivity extends AppCompatActivity {
     }
     @OnClick(R.id.button_register)
     public void onRegisterSubmit(View v) {
+        String g;
+        int selectedRadioButtonID = radioGroup.getCheckedRadioButtonId();
+        if (selectedRadioButtonID != -1) {
+
+            RadioButton selectedRadioButton = (RadioButton) findViewById(selectedRadioButtonID);
+            String selectedRadioButtonText = selectedRadioButton.getText().toString();
+
+            g=selectedRadioButtonText;
+        }
+        else{
+            g="";
+        }
 
         mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        final String GENDER=g;
         final String DOB = sdf.format(new Date(mYear2, mMonth2, mDay2));
-        final String FIRST_NAME=first_name.getText().toString().trim();
-        final String LAST_NAME=last_name.getText().toString().trim();
+        final String FULL_NAME=full_name.getText().toString().trim();
         final String CITY=city.getSelectedItem().toString();
         final String BLOODGROUP=bloodgroup.getSelectedItem().toString();
         final String EMAIL=email.getText().toString().trim();
         final String MOBILE=mobile.getText().toString().trim();
-        if(DOB.matches("")||FIRST_NAME.matches("")||LAST_NAME.matches("")||CITY.matches("")||BLOODGROUP.matches("")||EMAIL.matches("")||MOBILE.matches(""))
+        final String PASSWORD=password.getText().toString();
+        if(PASSWORD.matches("")||DOB.matches("")||FULL_NAME.matches("")||CITY.matches("")||BLOODGROUP.matches("")||EMAIL.matches("")||MOBILE.matches(""))
             Toast.makeText(this, "All Fields are not filled.", Toast.LENGTH_LONG).show();
         else {
             progressDialog.setMessage("Registering user...");
@@ -126,14 +143,14 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
+                    params.put("gender", GENDER);
                     params.put("dob", DOB);
-                    params.put("name", FIRST_NAME+" "+LAST_NAME);
-//                    params.put("lname", LAST_NAME);
+                    params.put("name", FULL_NAME);
                     params.put("city", CITY);
                     params.put("bloodgroup", BLOODGROUP);
                     params.put("email", EMAIL);
                     params.put("mobile", MOBILE);
-                    params.put("password", "abc123xyz");
+                    params.put("password", PASSWORD);
                     return params;
                 }
             };
