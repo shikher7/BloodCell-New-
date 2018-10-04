@@ -77,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
             return;
         }
+        progressDialog = new ProgressDialog(this);
         ButterKnife.bind(this);
         ArrayAdapter<String> adapter1= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Blood_Group));
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -125,10 +126,18 @@ public class RegisterActivity extends AppCompatActivity {
 
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
+                                if(!jsonObject.getBoolean("error"))
+                                {
+                                    Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                }
+                                else
+                                {
+                                    Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                }
 
-                                Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-
-                            } catch (JSONException e) {
+                            } catch (JSONException e)
+                            {
                                 e.printStackTrace();
                             }
                         }
@@ -154,8 +163,6 @@ public class RegisterActivity extends AppCompatActivity {
                     return params;
                 }
             };
-
-
             RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
 
 
