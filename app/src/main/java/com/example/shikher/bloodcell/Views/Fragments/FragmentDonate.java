@@ -89,7 +89,7 @@ public class FragmentDonate extends Fragment
         mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         final String DATE1 = sdf.format(new Date(mYear2, mMonth2, mDay2));
-
+        progressDialog = new ProgressDialog(getContext());
         Calendar c = Calendar.getInstance();
         String currentDate = sdf.format(c.getTime());
 
@@ -101,7 +101,7 @@ public class FragmentDonate extends Fragment
                 progressDialog.show();
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                        Constants.URL_REGISTER,
+                        Constants.URL_DONATE,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
