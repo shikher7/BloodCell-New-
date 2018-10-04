@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 
 import com.example.shikher.bloodcell.R;
 
-/**
- * Created by shikher on 30/6/17.
- */
 
 public class FragmentContactUs extends Fragment {
     @Nullable

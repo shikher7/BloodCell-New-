@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-//        Log.v("HEY",(SharedPrefManager.getInstance(this).getUserEmail()));
         ButterKnife.bind(this);
         email.setText(SharedPrefManager.getInstance(this).getUserEmail());
         name.setText(SharedPrefManager.getInstance(this).getUsername());

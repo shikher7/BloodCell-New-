@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,12 +23,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.shikher.bloodcell.Background.Background_Donate;
 import com.example.shikher.bloodcell.R;
 import com.example.shikher.bloodcell.Utils.Constants;
 import com.example.shikher.bloodcell.Utils.RequestHandler;
 import com.example.shikher.bloodcell.Utils.SharedPrefManager;
-import com.example.shikher.bloodcell.Views.Authentication.LoginActivity;
 import com.example.shikher.bloodcell.Views.Main.MainActivity;
 
 import org.json.JSONException;
@@ -88,12 +85,12 @@ public class FragmentDonate extends Fragment
         final String TIMESLOT = timeslot.getSelectedItem().toString();
         mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        final String DATE1 = sdf.format(new Date(mYear2, mMonth2, mDay2));
+        String date = sdf.format(new Date(mYear2, mMonth2, mDay2));
         progressDialog = new ProgressDialog(getContext());
         Calendar c = Calendar.getInstance();
-        String currentDate = sdf.format(c.getTime());
+        final String DATE1 = sdf.format(c.getTime());
 
-        if(DATE1.compareTo(currentDate)>=0) {
+        if(date.compareTo(DATE1)>=0) {
             if (CITY.matches("") || BLOODBANK.matches("") ||TIMESLOT.matches("") || DATE1.matches(""))
                 Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
             else {
@@ -149,10 +146,6 @@ public class FragmentDonate extends Fragment
 
 
             }
-//                String type = "donate_submit";
-//                submit.setEnabled(false);
-//                Background_Donate backgroundDonate = new Background_Donate(getActivity());
-//                backgroundDonate.execute(type, citys, bloodbanks, timelsots, dates);
 
         }
         else {

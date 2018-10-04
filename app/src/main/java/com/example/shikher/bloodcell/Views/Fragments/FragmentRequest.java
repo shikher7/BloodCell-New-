@@ -1,6 +1,9 @@
 package com.example.shikher.bloodcell.Views.Fragments;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,19 +15,32 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shikher.bloodcell.Background.Background_Request;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.shikher.bloodcell.R;
+import com.example.shikher.bloodcell.Utils.Constants;
+import com.example.shikher.bloodcell.Utils.RequestHandler;
+import com.example.shikher.bloodcell.Utils.SharedPrefManager;
+import com.example.shikher.bloodcell.Views.Main.MainActivity;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,36 +58,23 @@ public class FragmentRequest extends Fragment {
     Spinner bloogroup;
     @BindView(R.id.city_spinner)
     Spinner city;
-    @BindView(R.id.first_name)
-    EditText firstName;
-    @BindView(R.id.last_name)
-    EditText lastName;
+    @BindView(R.id.full_name)
+    EditText full_name;
     @BindView(R.id.description)
     EditText description;
     @BindView(R.id.age)
     EditText age;
     @BindView(R.id.button_request)
     Button submit;
-    /*
-
-    @BindView(R.id.male)
-    RadioButton male;
-    @BindView(R.id.female)
-    RadioButton female;
-    @BindView(R.id.others)
-    RadioButton others;
-    @BindView(R.id.date)
-    EditText  date;
-*/  @BindView(R.id.datePicker)
+    @BindView(R.id.request_radioGroup)
+    RadioGroup radioGroup;
+    @BindView(R.id.datePicker)
     TextView date;
     @BindView(R.id.doctor_name)
     EditText  doctorName;
     @BindView(R.id.hospital_name)
     EditText  hospitalName;
-
-//    public static final String BASE_URL = "http://weberservice.co.in";
-
-//    private ArrayList<city_JSONResponse.AndroidVersion> mArrayList;
+    private ProgressDialog  progressDialog;
     private int mYear, mMonth, mDay;
     private int mYear2, mMonth2, mDay2;
 
@@ -104,34 +107,100 @@ public class FragmentRequest extends Fragment {
         }
     @OnClick(R.id.button_request)
     public void onDonateSubmit(View v) {
-        String citys = city.getSelectedItem().toString();
-        String bloodbanks = bloodbank.getSelectedItem().toString();
-        String bloodgroups = bloogroup.getSelectedItem().toString();
-        String first_name=firstName.getText().toString();
-        String last_name=lastName.getText().toString();
-        String descriptions=description.getText().toString();
-        String ages=age.getText().toString();
-        String doctor_name=doctorName.getText().toString();
-        String hospital_name=hospitalName.getText().toString();
-        String components=component.getSelectedItem().toString();
+        progressDialog = new ProgressDialog(getContext());
+        String g;
+        int selectedRadioButtonID = radioGroup.getCheckedRadioButtonId();
+        if (selectedRadioButtonID != -1) {
+
+            RadioButton selectedRadioButton = (RadioButton) getActivity().findViewById(selectedRadioButtonID);
+            String selectedRadioButtonText = selectedRadioButton.getText().toString();
+
+            g=selectedRadioButtonText;
+        }
+        else{
+            g="";
+        }
+        final String GENDER=g;
+        final String CITY = city.getSelectedItem().toString();
+        final String BLOODBANK = bloodbank.getSelectedItem().toString();
+        final String BLOODGROUP = bloogroup.getSelectedItem().toString();
+        final String NAME=full_name.getText().toString();
+        final String DESCRIPTION=description.getText().toString();
+        final String AGE=age.getText().toString();
+        final String DOCTOR=doctorName.getText().toString();
+        final String HOSPITAL=hospitalName.getText().toString();
+        final String COMPONENT=component.getSelectedItem().toString();
         mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dates = sdf.format(new Date(mYear2, mMonth2, mDay2));
 
         Calendar c = Calendar.getInstance();
-        String currentDate = sdf.format(c.getTime());
+        final String DATE1 = sdf.format(c.getTime());
 
-        if(dates.compareTo(currentDate)>=0) {
+        if(dates.compareTo(DATE1)>=0) {
 
-            if (citys.matches("") || bloodbanks.matches("") || bloodgroups.matches("") || first_name.matches("") ||
-                    last_name.matches("") || descriptions.matches("") || ages.matches("") || doctor_name.matches("") || hospital_name.matches(""))
+            if (CITY.matches("") || BLOODBANK.matches("") || BLOODGROUP.matches("") || NAME.matches("") ||
+                    GENDER.matches("") || DESCRIPTION.matches("") || AGE.matches("") || DOCTOR.matches("") ||
+                    HOSPITAL.matches("")||COMPONENT.matches("")||DATE1.matches(""))
                 Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
             else {
-                submit.setEnabled(false);
-                String type = "request_submit";
-                Background_Request backgroundRequest = new Background_Request(getActivity());
-                backgroundRequest.execute(type, citys, bloodbanks, bloodgroups, first_name, last_name,
-                        descriptions, ages, doctor_name, hospital_name, dates, components);
+                progressDialog.setMessage("Sending Request...");
+                progressDialog.show();
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                        Constants.URL_REQUEST,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                progressDialog.dismiss();
+
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    if(!jsonObject.getBoolean("error"))
+                                    {
+                                        Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                        Intent i = new Intent(getContext(), MainActivity.class);
+                                        getActivity().startActivity(i);
+                                        ((Activity)getContext()).finish();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                    }
+
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressDialog.hide();
+                                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("gender", GENDER);
+                        params.put("city", CITY);
+                        params.put("bloodbank", BLOODBANK);
+                        params.put("bloodgroup", BLOODGROUP);
+                        params.put("name", NAME);
+                        params.put("desc", DESCRIPTION);
+                        params.put("age", AGE);
+                        params.put("doc", DOCTOR);
+                        params.put("hosp", HOSPITAL);
+                        params.put("comp", COMPONENT);
+                        params.put("date", DATE1);
+                        params.put("user_id",SharedPrefManager.getInstance(getActivity()).getUserID());
+                        return params;
+                    }
+                };
+                RequestHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
+
 
             }
         }

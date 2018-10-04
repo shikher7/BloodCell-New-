@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.shikher.bloodcell.R;
 
-/**
- * Created by Shikher on 14-06-2017.
- */
+
 
 public class FragmentFeedback extends Fragment {
 
