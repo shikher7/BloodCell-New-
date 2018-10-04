@@ -1,6 +1,9 @@
 package com.example.shikher.bloodcell.Views.Fragments;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,16 +14,32 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.shikher.bloodcell.Background.Background_Donate;
 import com.example.shikher.bloodcell.R;
+import com.example.shikher.bloodcell.Utils.Constants;
+import com.example.shikher.bloodcell.Utils.RequestHandler;
+import com.example.shikher.bloodcell.Utils.SharedPrefManager;
+import com.example.shikher.bloodcell.Views.Authentication.LoginActivity;
+import com.example.shikher.bloodcell.Views.Main.MainActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,10 +48,6 @@ import butterknife.OnClick;
 
 public class FragmentDonate extends Fragment
 {
-//    public static final String BASE_URL = "shikher707.000webhostapp.com";
-
-//    private ArrayList<city_JSONResponse.AndroidVersion> mArrayList;
-
     private int mYear, mMonth, mDay;
     private int mYear2, mMonth2, mDay2;
     @BindView(R.id.spinner_blood_bank)
@@ -45,29 +60,13 @@ public class FragmentDonate extends Fragment
         TextView date;
         @BindView(R.id.button_donate)
         Button submit;
+        private ProgressDialog progressDialog;
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_donate, container, false);
             ButterKnife.bind(this, rootView);
-//            Retrofit retrofit = new Retrofit.Builder()
-//                    .baseUrl(BASE_URL)
-//                    .addConverterFactory(GsonConverterFactory.create())
-//                    .build();
-//            city_RequestInterface request = retrofit.create(city_RequestInterface.class);
-//            Call<city_JSONResponse> call = request.getJSON();
-//            call.enqueue(new Callback<city_JSONResponse>() {
-//
-//                @Override
-//                public void onResponse(Call<city_JSONResponse> call, Response<city_JSONResponse> response) {
-//
-//                    city_JSONResponse jsonResponse = response.body();
-//                    mArrayList = new ArrayList<>(Arrays.asList(jsonResponse.getAndroid()));
-//                    String Blood_Banks[]=new String[mArrayList.size()];
-//                    for(int i=0;i<mArrayList.size();i++)
-//                    {
-//                        Blood_Banks[i]=mArrayList.get(i).getBankName().toString();
-//                    }
+
             String Blood_Banks[]={"VIT BloodBank","Katpadi BloodBank","CMC BloodBank"};
 
             ArrayAdapter<String> adapter1= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,Blood_Banks);
@@ -79,43 +78,81 @@ public class FragmentDonate extends Fragment
             ArrayAdapter<String> adapter3= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Time_slot));
             adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             timeslot.setAdapter(adapter3);
-//                }
 
-//                @Override
-//                public void onFailure(Call<city_JSONResponse> call, Throwable t) {
-//                    Log.d("Error",t.getMessage());
-//                }
-//            });
             return rootView;
     }
     @OnClick(R.id.button_donate)
     public void onDonateSubmit(View v) {
-        String citys = city.getSelectedItem().toString();
-        String bloodbanks = bloodbank.getSelectedItem().toString();
-        String timelsots = timeslot.getSelectedItem().toString();
-
-        /*int   day  = date.getDayOfMonth();
-        int   month= date.getMonth();
-        int   year = date.getYear();
-        year=year-1900;*/
+        final String CITY = city.getSelectedItem().toString();
+        final String BLOODBANK = bloodbank.getSelectedItem().toString();
+        final String TIMESLOT = timeslot.getSelectedItem().toString();
         mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String dates = sdf.format(new Date(mYear2, mMonth2, mDay2));
+        final String DATE1 = sdf.format(new Date(mYear2, mMonth2, mDay2));
 
         Calendar c = Calendar.getInstance();
         String currentDate = sdf.format(c.getTime());
 
-        if(dates.compareTo(currentDate)>=0) {
-            if (citys.matches("") || bloodbanks.matches("") || timelsots.matches("") || dates.matches(""))
+        if(DATE1.compareTo(currentDate)>=0) {
+            if (CITY.matches("") || BLOODBANK.matches("") ||TIMESLOT.matches("") || DATE1.matches(""))
                 Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
             else {
+                progressDialog.setMessage("Sending Donation Request...");
+                progressDialog.show();
 
-                String type = "donate_submit";
-                submit.setEnabled(false);
-                Background_Donate backgroundDonate = new Background_Donate(getActivity());
-                backgroundDonate.execute(type, citys, bloodbanks, timelsots, dates);
+                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                        Constants.URL_REGISTER,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                progressDialog.dismiss();
+
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    if(!jsonObject.getBoolean("error"))
+                                    {
+                                        Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                        Intent i = new Intent(getContext(), MainActivity.class);
+                                        getActivity().startActivity(i);
+                                        ((Activity)getContext()).finish();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                    }
+
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressDialog.hide();
+                                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("city", CITY);
+                        params.put("bloodbank", BLOODBANK);
+                        params.put("timeslot", TIMESLOT);
+                        params.put("date", DATE1);
+                        params.put("user_id",SharedPrefManager.getInstance(getActivity()).getUserID());
+                        return params;
+                    }
+                };
+                RequestHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
+
 
             }
+//                String type = "donate_submit";
+//                submit.setEnabled(false);
+//                Background_Donate backgroundDonate = new Background_Donate(getActivity());
+//                backgroundDonate.execute(type, citys, bloodbanks, timelsots, dates);
 
         }
         else {
@@ -126,14 +163,10 @@ public class FragmentDonate extends Fragment
 @OnClick(R.id.calendar_donate)
 public void calendar_dialog()
 {
-
-    // Get Current Date
     final Calendar c = Calendar.getInstance();
     mYear = c.get(Calendar.YEAR);
     mMonth = c.get(Calendar.MONTH);
     mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
     DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
             new DatePickerDialog.OnDateSetListener() {
 
