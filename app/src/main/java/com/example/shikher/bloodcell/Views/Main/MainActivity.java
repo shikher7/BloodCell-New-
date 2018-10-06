@@ -28,6 +28,7 @@ import com.example.shikher.bloodcell.Views.Fragments.FragmentFeedback;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest;
 
 import com.example.shikher.bloodcell.R;
+import com.example.shikher.bloodcell.Views.Fragments.LearnFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new FragmentRequest();
                 break;
             case R.id.search:
-                Toast.makeText(this, "Coming soon in next Prototype.!!",
+                Toast.makeText(this, "Coming soon in next Review 3.!!",
                         Toast.LENGTH_LONG).show();
 //                fragment = new FragmentSearch();
                 break;
@@ -137,9 +138,9 @@ public class MainActivity extends AppCompatActivity
                 fragment = new FragmentContactUs();
                 break;
             case R.id.info:
-                Toast.makeText(this, "Coming soon in next Prototype.!!",
-                        Toast.LENGTH_LONG).show();
-//                fragment = new LearnFragment();
+//                Toast.makeText(this, "Coming soon in next Review 3.!!",
+//                        Toast.LENGTH_LONG).show();
+                fragment = new LearnFragment();
                 break;
         }
         if (fragment != null) {
