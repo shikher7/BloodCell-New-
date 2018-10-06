@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +27,7 @@ import com.example.shikher.bloodcell.Views.Fragments.FragmentFeedback;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest;
 
 import com.example.shikher.bloodcell.R;
-import com.example.shikher.bloodcell.Views.Fragments.LearnFragment;
+import com.example.shikher.bloodcell.Views.Fragments.FragmentLearn;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -140,7 +139,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.info:
 //                Toast.makeText(this, "Coming soon in next Review 3.!!",
 //                        Toast.LENGTH_LONG).show();
-                fragment = new LearnFragment();
+                fragment = new FragmentLearn();
                 break;
         }
         if (fragment != null) {

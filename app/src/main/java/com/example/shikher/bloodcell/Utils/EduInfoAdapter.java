@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.shikher.bloodcell.Views.Fragments.LearnFragment;
+import com.example.shikher.bloodcell.Views.Fragments.FragmentLearn;
 import com.example.shikher.bloodcell.Views.Fragments.LearnFragmentFiles.FactsFragment;
 import com.example.shikher.bloodcell.Views.Fragments.LearnFragmentFiles.TypesFragment;
 import com.example.shikher.bloodcell.Views.Fragments.LearnFragmentFiles.WhatFragment;
@@ -44,7 +44,7 @@ public class EduInfoAdapter extends FragmentStatePagerAdapter {
 
         } else {
 
-            return new LearnFragment();
+            return new FragmentLearn();
         }
 
     }

@@ -14,7 +14,7 @@ import com.example.shikher.bloodcell.R;
 import com.example.shikher.bloodcell.Utils.EduInfoAdapter;
 
 
-public class LearnFragment extends Fragment {
+public class FragmentLearn extends Fragment {
 
     TabLayout.Tab what,why,types,facts;
 
