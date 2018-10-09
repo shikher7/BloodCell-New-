@@ -26,11 +26,7 @@
         <item>Platelet Rich Plasma</item>
         <item>Fresh Frozen Plasma</item>
     </string-array>
-    <string-array name="Blood_Banks">
-        <item>Example1</item>
-        <item>Example2</item>
-        <item>Example3</item>
-    </string-array>
+
     <string-array name="Cities">
         <item>Vellore</item>
         <item>Chennai</item>
@@ -41,15 +37,16 @@
         <item>12:00 pm</item>
         <item>02:00 pm</item>
     </string-array>
-    <string name="title_activity_main3">Main3Activity</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="about_us_text">The State Blood Transfusion Council is a society registered under the Societies registration Act. The SBTC should be a representative body having in it representation from the Directorate of Health Services in the state, State Drug Controller, Department of Finance of the State/UT, Indian Red Cross Society, private blood banks, NGO active in the field of securing voluntary blood donations. \nThe Secretary to the Government incharge of Department of Health would be the president of the SBTC. The SBTC will be responsible for overall implementation, within individual state/UT, all policy decisions for the BTS taken by the NBTC, within the parameters of the NBP and as detailed in the Action Plan for blood safety.</string>
-    <string name="contact_us">Business Development
-M	:	+91 8400 999 780 (UP East)
-E	:	contact@weberservices.co.in
-Support Desk
-M	:	+91 8400 999 790
-E	:	support@weberservices.co.in</string>
+    <string-array name="Blood_Banks">
+        <item>Masonic Blood Bank</item>
+        <item>Chettinad Blood Bank</item>
+        <item>Red Cross Blood Bank</item>
+        <item>Indian Red Cross Society</item>
+        <item>Lions Blood Bank</item>
+        <item>Annai Teresa Blood Bank</item>
+        <item>Bangalore Blood Bank</item>
+        <item>Life Care Blood Bank</item>
+    </string-array>
+
+
 </resources>

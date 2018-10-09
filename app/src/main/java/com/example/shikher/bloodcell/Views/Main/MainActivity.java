@@ -11,9 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,13 +19,13 @@ import android.widget.Toast;
 import com.example.shikher.bloodcell.Utils.SharedPrefManager;
 import com.example.shikher.bloodcell.Views.Authentication.LoginActivity;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentAboutUs;
-import com.example.shikher.bloodcell.Views.Fragments.FragmentContactUs;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentDonate;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentFeedback;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentRequest;
 
 import com.example.shikher.bloodcell.R;
 import com.example.shikher.bloodcell.Views.Fragments.FragmentLearn;
+import com.example.shikher.bloodcell.Views.Fragments.FragmentSearch;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,8 +40,17 @@ public class MainActivity extends AppCompatActivity
     TextView email;
     @BindView(R.id.phone)
     TextView phone;
+    @BindView(R.id.city)
+    TextView city;
+    @BindView(R.id.gender)
+    TextView gender;
+    @BindView(R.id.dob)
+    TextView dob;
+    @BindView(R.id.bloodgroup)
+    TextView bloodgroup;
     @BindView(R.id.logout)
     Button logout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,11 @@ public class MainActivity extends AppCompatActivity
         email.setText(SharedPrefManager.getInstance(this).getUserEmail());
         name.setText(SharedPrefManager.getInstance(this).getUsername());
         phone.setText(SharedPrefManager.getInstance(this).getUserMobile());
+        city.setText(SharedPrefManager.getInstance(this).getUserCity());
+        gender.setText(SharedPrefManager.getInstance(this).getUserGender());
+        dob.setText(SharedPrefManager.getInstance(this).getUserDob());
+        bloodgroup.setText(SharedPrefManager.getInstance(this).getUserBloodgroup());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -81,15 +93,10 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+
 
     @OnClick(R.id.logout)
-    public void onLogout(View view) {
+    public void onLogout() {
         SharedPrefManager.getInstance(this).logout();
         finish();
         startActivity(new Intent(this, LoginActivity.class));
@@ -102,20 +109,28 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
     private void displayselectedscreen(int id) {
         Fragment fragment = null;
         switch (id) {
-            case R.id.history:
-                Toast.makeText(this, "Coming soon in next Prototype.!!",
-                        Toast.LENGTH_LONG).show();
-//                fragment = new FragmentDonate();
+            case R.id.home:
+                finish();
+                startActivity(new Intent(this, MainActivity.class));
                 break;
+            case R.id.menu_logout:
+                onLogout();
+                break;
+
+//            case R.id.history:
+//                Toast.makeText(this, "Coming soon in next Review.!!",
+//                        Toast.LENGTH_LONG).show();
+////                fragment = new FragmentDonate();
+//                break;
             case R.id.donate:
                 fragment = new FragmentDonate();
                 break;
@@ -123,9 +138,9 @@ public class MainActivity extends AppCompatActivity
                 fragment = new FragmentRequest();
                 break;
             case R.id.search:
-                Toast.makeText(this, "Coming soon in next Review 3.!!",
-                        Toast.LENGTH_LONG).show();
-//                fragment = new FragmentSearch();
+//                Toast.makeText(this, "Coming soon in next Review 3.!!",
+//                        Toast.LENGTH_LONG).show();
+                fragment = new FragmentSearch();
                 break;
             case R.id.feedback:
                 fragment = new FragmentFeedback();
@@ -133,9 +148,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.about_us:
                 fragment = new FragmentAboutUs();
                 break;
-            case R.id.contact_us:
-                fragment = new FragmentContactUs();
-                break;
+
             case R.id.info:
 //                Toast.makeText(this, "Coming soon in next Review 3.!!",
 //                        Toast.LENGTH_LONG).show();

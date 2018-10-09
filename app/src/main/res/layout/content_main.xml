@@ -59,9 +59,18 @@
                                 android:textColor="#2E7D32"
                                 android:textSize="25sp"
                                 android:textStyle="bold" />
-
                             <TextView
                                 android:id="@+id/textView4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="7dp"
+                                android:text="Phone : "
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                 />
+
+                            <TextView
+                                android:id="@+id/phone"
+                                android:textColor="#000"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Mobile:"
@@ -69,36 +78,112 @@
 
                                 android:textStyle="bold" />
 
-
-
                             <TextView
-                                android:id="@+id/phone"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="7dp"
-                                android:text="Phone : "
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:textColor="#000" />
 
-
-                            <TextView
                                 android:id="@+id/textView5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Email:"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/email"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="7dp"
                                 android:layout_marginTop="10dp"
                                 android:text="Email :"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:textColor="#000" />
+                                 />
+
+
+                            <TextView
+                                android:id="@+id/email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Email:"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="#000"
+                                android:textStyle="bold" />
+
+
+
+                            <TextView
+                                android:id="@+id/textView11"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="7dp"
+                                android:layout_marginTop="10dp"
+                                android:text="Bloodgroup :"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                 />
+                            <TextView
+                                android:id="@+id/bloodgroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Bloodgroup :"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="#000"
+                                android:textStyle="bold" />
+
+
+
+                            <TextView
+                                android:id="@+id/textView12"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="7dp"
+                                android:layout_marginTop="10dp"
+                                android:text="City :"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                 />
+                            <TextView
+                                android:id="@+id/city"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="City :"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="#000"
+
+                                android:textStyle="bold" />
+
+
+                            <TextView
+
+                                android:id="@+id/textView13"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="7dp"
+                                android:layout_marginTop="10dp"
+                                android:text="Gender :"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                 />
+                            <TextView
+                                android:id="@+id/gender"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Gender :"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="#000"
+
+                                android:textStyle="bold" />
+
+
+                            <TextView
+
+                                android:id="@+id/textView14"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="7dp"
+                                android:layout_marginTop="10dp"
+                                android:text="DOB :"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                 />
+                            <TextView
+                                android:id="@+id/dob"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="DOB :"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="#000"
+                                android:textStyle="bold" />
+
+
 
 
                             <TextView
@@ -107,6 +192,7 @@
                                 android:layout_marginBottom="5dp"
                                 android:text="Account Options"
                                 android:textColor="#2E7D32"
+                                android:layout_marginTop="64dp"
                                 android:textSize="25sp"
                                 android:textStyle="bold" />
 

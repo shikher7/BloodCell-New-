@@ -12,6 +12,8 @@ public class Constants {
     public static final String URL_LOGIN = ROOT_URL+"userLogin.php";
     public static final String URL_DONATE = ROOT_URL+"donationRequest.php";
     public static final String URL_REQUEST = ROOT_URL+"recipientsRequest.php";
+    public static final String URL_FEEDBACK = ROOT_URL+"feedback.php";
+    public static final String URL_SEARCH_MAP = ROOT_URL+"Bloodbank.php";
 
 
 

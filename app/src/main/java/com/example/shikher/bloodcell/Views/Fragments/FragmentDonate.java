@@ -64,9 +64,9 @@ public class FragmentDonate extends Fragment
             View rootView = inflater.inflate(R.layout.fragment_donate, container, false);
             ButterKnife.bind(this, rootView);
 
-            String Blood_Banks[]={"VIT BloodBank","Katpadi BloodBank","CMC BloodBank"};
 
-            ArrayAdapter<String> adapter1= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,Blood_Banks);
+
+            ArrayAdapter<String> adapter1= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Blood_Banks));
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             bloodbank.setAdapter(adapter1);
             ArrayAdapter<String> adapter2= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Cities));
@@ -85,13 +85,13 @@ public class FragmentDonate extends Fragment
         final String TIMESLOT = timeslot.getSelectedItem().toString();
         mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(new Date(mYear2, mMonth2, mDay2));
+        final String date = sdf.format(new Date(mYear2, mMonth2, mDay2));
         progressDialog = new ProgressDialog(getContext());
         Calendar c = Calendar.getInstance();
         final String DATE1 = sdf.format(c.getTime());
 
         if(date.compareTo(DATE1)>=0) {
-            if (CITY.matches("") || BLOODBANK.matches("") ||TIMESLOT.matches("") || DATE1.matches(""))
+            if (CITY.matches("") || BLOODBANK.matches("") ||TIMESLOT.matches("") || date.matches(""))
                 Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
             else {
                 progressDialog.setMessage("Sending Donation Request...");
@@ -137,7 +137,7 @@ public class FragmentDonate extends Fragment
                         params.put("city", CITY);
                         params.put("bloodbank", BLOODBANK);
                         params.put("timeslot", TIMESLOT);
-                        params.put("date", DATE1);
+                        params.put("date", date);
                         params.put("user_id",SharedPrefManager.getInstance(getActivity()).getUserID());
                         return params;
                     }

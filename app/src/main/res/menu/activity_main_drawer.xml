@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <item android:title="Actions">
+    <menu>
+
         <item
             android:id="@+id/donate"
             android:icon="@drawable/donate_icon"
@@ -11,10 +13,10 @@
             android:id="@+id/request"
             android:icon="@drawable/ic_request"
             android:title="Request Blood" />
-        <item
-            android:id="@+id/history"
-            android:icon="@drawable/ic_history"
-            android:title="Donation History" />
+        <!--<item-->
+            <!--android:id="@+id/history"-->
+            <!--android:icon="@drawable/ic_history"-->
+            <!--android:title="Donation History" />-->
 
         <item
             android:id="@+id/search"
@@ -25,15 +27,13 @@
             android:id="@+id/info"
             android:icon="@drawable/ic_menu_send"
             android:title="Educational information" />
+    </menu>
 
-    </group>
+    </item>
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/contact_us"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Contact Us" />
+
             <item
                 android:id="@+id/about_us"
                 android:icon="@drawable/ic_about_us"
@@ -45,4 +45,17 @@
         </menu>
     </item>
 
+    <item android:title="Settings">
+        <menu>
+            <item android:id="@+id/home"
+                android:icon="@drawable/common_full_open_on_phone"
+                android:title="Home"
+                />
+            <item
+                android:id="@+id/menu_logout"
+                android:icon="@drawable/logout"
+                android:title="Logout" />
+
+        </menu>
+    </item>
 </menu>

@@ -3,6 +3,7 @@ package com.example.shikher.bloodcell.Views.Fragments;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -87,9 +89,8 @@ public class FragmentRequest extends Fragment {
             View rootView = inflater.inflate(R.layout.fragment_request, container, false);
 
             ButterKnife.bind(this, rootView);
-        String Blood_Banks[]={"VIT BloodBank","Katpadi BloodBank","CMC BloodBank"};
 
-            ArrayAdapter<String> adapter1= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,Blood_Banks);
+            ArrayAdapter<String> adapter1= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Blood_Banks));
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             bloodbank.setAdapter(adapter1);
             ArrayAdapter<String> adapter2= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Blood_Group));
@@ -107,6 +108,11 @@ public class FragmentRequest extends Fragment {
         }
     @OnClick(R.id.button_request)
     public void onDonateSubmit(View v) {
+        InputMethodManager inputManager = (InputMethodManager)
+                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
         progressDialog = new ProgressDialog(getContext());
         String g;
         int selectedRadioButtonID = radioGroup.getCheckedRadioButtonId();
@@ -132,7 +138,7 @@ public class FragmentRequest extends Fragment {
         final String COMPONENT=component.getSelectedItem().toString();
         mYear2=mYear2-1900;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String dates = sdf.format(new Date(mYear2, mMonth2, mDay2));
+        final String dates = sdf.format(new Date(mYear2, mMonth2, mDay2));
 
         Calendar c = Calendar.getInstance();
         final String DATE1 = sdf.format(c.getTime());
@@ -141,7 +147,7 @@ public class FragmentRequest extends Fragment {
 
             if (CITY.matches("") || BLOODBANK.matches("") || BLOODGROUP.matches("") || NAME.matches("") ||
                     GENDER.matches("") || DESCRIPTION.matches("") || AGE.matches("") || DOCTOR.matches("") ||
-                    HOSPITAL.matches("")||COMPONENT.matches("")||DATE1.matches(""))
+                    HOSPITAL.matches("")||COMPONENT.matches("")||dates.matches(""))
                 Toast.makeText(getActivity(), "All Fields are not filled.", Toast.LENGTH_LONG).show();
             else {
                 progressDialog.setMessage("Sending Request...");
@@ -194,7 +200,7 @@ public class FragmentRequest extends Fragment {
                         params.put("doc", DOCTOR);
                         params.put("hosp", HOSPITAL);
                         params.put("comp", COMPONENT);
-                        params.put("date", DATE1);
+                        params.put("date", dates);
                         params.put("user_id",SharedPrefManager.getInstance(getActivity()).getUserID());
                         return params;
                     }
