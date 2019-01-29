@@ -11,7 +11,7 @@ BloodCell is an interactive application that can be used to schedule an individu
 The BloodCell Application uses Relational Database (MySql Database) to Store User Information for Login and Registration. It also uses Relational Database (MySql Database) for Storing Donation Request, Recipients Request, Blood Bank Database and Feedback for respective User ID’s. 
 
 
-FUNCTIONALITIES OF APP 
+# FUNCTIONALITIES OF THE APP 
  
 ➢	Scheduling Donation of Blood  
  
@@ -27,7 +27,7 @@ FUNCTIONALITIES OF APP
  
 ➢	Feedback form  
 
-DATABASE 
+# DATABASE 
  
 The BloodCell Application uses MySql Database (phpMyAdmin) to Donation and Recipients requests. It also uses it for user Login/Registration and storing data about the bloodbanks. 
  
@@ -35,7 +35,7 @@ MySQL is an open-source relational database management system (RDBMS)
  
 Android VOLLEY library is used to setup connection between android app and mysql using php as backend. 
 
-SCREENSHOTS
+# SCREENSHOTS
 
 ![alt text](https://github.com/shikher7/BloodCell-New-/blob/master/BloodCell%20Screenhots/LoginPage.jpg)
 
