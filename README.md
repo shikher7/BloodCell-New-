@@ -1,10 +1,20 @@
 # BloodCell-New-
 
-Link to Download Android application apk-https://drive.google.com/file/d/1Sz7_-LrHtq5I6ZknVmFx4jGrj_LF2CuL/view?usp=sharing
+#### For Detailed Description about this project click this link - 
+https://github.com/shikher7/BloodCell-New-/blob/master/BLOODCELL%20REPORT.pdf
 
-Link to BloodBank website(In Development)-http://shikher707.000webhostapp.com/admin/
+______________________________________________________________________________________________
 
-View Report in the Files for detailed description about the application (with screenshots)
+#### Link to Download Android application apk-
+https://drive.google.com/file/d/1Sz7_-LrHtq5I6ZknVmFx4jGrj_LF2CuL/view?usp=sharing
+
+______________________________________________________________________________________________
+
+#### Link to BloodBank website(In Development)-
+http://shikher707.000webhostapp.com/admin/
+
+_____________________________________________________________________________________________
+
 
 BloodCell is an interactive application that can be used to schedule an individual’s blood donation to a specific blood bank, request blood for a person, history of requests and keep a database of blood banks in an area containing information about them. Users can search bloodbanks viewed as markers on the map and users can also navigate to a particular bloodbank of their choice. Our project aims to providing users an easy to understand and informative User Interface for Blood Donation and requirement to save them the hassle of contacting every blood bank in the neighbourhood individually. 
  
